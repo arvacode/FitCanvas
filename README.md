@@ -1,7 +1,7 @@
 # FitCanvas
 Resize Images and Place on Canvas
 
-[@arvacode](instagram.com/arvacode)
+[@arvacode](https://instagram.com/arvacode)
 
 https://hephium.com
 
