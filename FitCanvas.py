@@ -31,7 +31,7 @@ OUTPUT_WIDTH = 1080
 # Height of the output canvas
 OUTPUT_HEIGHT = 1080
 # Padding around the image
-PADDING = 60
+PADDING = 30
 # Background color of the canvas
 BACKGROUND_COLOR = 'white'
 # Output image format (e.g., 'JPEG', 'PNG', or None to retain original)
@@ -47,11 +47,9 @@ def get_image_paths(input_path):
     image_paths = []
 
     if os.path.isfile(input_path):
-        # Check if the file has a supported extension (case-insensitive)
         if os.path.splitext(input_path)[1].lower() in extensions:
             image_paths.append(input_path)
     elif os.path.isdir(input_path):
-        # Walk through the directory recursively
         for root, dirs, files in os.walk(input_path):
             for file in files:
                 if os.path.splitext(file)[1].lower() in extensions:
@@ -64,11 +62,17 @@ def get_image_paths(input_path):
 
 def process_image(image_path):
     with Image.open(image_path) as img:
-        max_size = (OUTPUT_WIDTH - 2 * PADDING, OUTPUT_HEIGHT - 2 * PADDING)
-        img.thumbnail(max_size, Image.LANCZOS)
+        usable_width = OUTPUT_WIDTH - 2 * PADDING
+        usable_height = OUTPUT_HEIGHT - 2 * PADDING
+        scale_width = usable_width / img.width
+        scale_height = usable_height / img.height
+        scale_factor = min(scale_width, scale_height)
+        new_width = int(img.width * scale_factor)
+        new_height = int(img.height * scale_factor)
+        img = img.resize((new_width, new_height), Image.LANCZOS)
         canvas = Image.new('RGB', (OUTPUT_WIDTH, OUTPUT_HEIGHT), BACKGROUND_COLOR)
-        x = (OUTPUT_WIDTH - img.width) // 2
-        y = (OUTPUT_HEIGHT - img.height) // 2
+        x = (OUTPUT_WIDTH - new_width) // 2
+        y = (OUTPUT_HEIGHT - new_height) // 2
         canvas.paste(img, (x, y))
         return canvas
 
