@@ -84,3 +84,25 @@ OUTPUT_FORMAT = None
 `cd C:\Users\YourName\Desktop`
 
 `python FitCanvas.py C:\Users\YourName\Pictures\ImageFolder`
+
+### Linux
+
+* Open Terminal
+  * Use the terminal application available on your Linux distribution.
+* Navigate to the Desired Output Directory:
+  * `cd /path/to/your/desired/output/directory` *Replace /path/to/your/desired/output/directory with the actual path where you want the output images to be saved.*
+* Execute Script
+  * `python3 FitCanvas.py /path/to/image_or_folder` *Replace /path/to/image_or_folder with the path to an image file or a directory containing images. Use `python3` if Python 3 is required for your script.*
+* Output Images
+  * Processed images will be saved in a subdirectory named `fitcanvas-output` within your current working directory.
+
+#### Example
+`cd ~/Desktop`
+
+`python3 FitCanvas.py ~/Pictures/ImageFolder`
+
+#### Basic Linux Instructions
+* Open Terminal.
+* Type `cd ~/Desktop` and press enter.
+* Type `python3 ` and drag the `FitCanvas.py` file into terminal. Locate an image or folder of images in your file manager and drag it into terminal. Press Enter.
+* Output images will be saved in the `fitcanvas-output` folder on your Desktop.
